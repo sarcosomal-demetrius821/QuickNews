@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY', default='f%m(qfjevzrs*c!^!wax-(7r=ghry*jm#ampx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default="127.0.0.1,.vercel.app,.now.sh", cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default="127.0.0.1,.vercel.app,.now.sh,quicknews-django-v2.karanjots801.workers.dev,quicknews.karanjot.co.in", cast=Csv())
 
 
 # Application definition

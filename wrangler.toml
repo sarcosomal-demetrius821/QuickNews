@@ -1,0 +1,34 @@
+# Cloudflare Containers Configuration for QuickNews Django App
+name = "quicknews-django-v2"
+main = "src/index.js"
+compatibility_date = "2025-06-24"
+
+# Container Configuration
+[[containers]]
+max_instances = 1  # SQLite = single instance only
+class_name = "DjangoContainerV2"
+image = "./Dockerfile"
+
+# Durable Objects Binding
+[[durable_objects.bindings]]
+name = "DJANGO_CONTAINER"
+class_name = "DjangoContainerV2"
+
+# Migrations for SQLite persistence
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["DjangoContainerV2"]
+
+# Environment Variables (non-secret)
+[vars]
+DJANGO_ENV = "production"
+PORT = "8080"
+
+# Keep container warm with cron triggers (optional)
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Observability
+[observability]
+enabled = true
+head_sampling_rate = 1.0

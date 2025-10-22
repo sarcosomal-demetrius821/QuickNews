@@ -1,0 +1,17 @@
+{
+  "name": "quicknews-django-container",
+  "version": "1.0.0",
+  "description": "Cloudflare Container deployment for QuickNews Django app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "latest"
+  },
+  "devDependencies": {
+    "wrangler": "^4.44.0"
+  }
+}

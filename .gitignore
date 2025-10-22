@@ -32,6 +32,7 @@ db.sqlite3-journal
 # Environment
 .env
 .env.local
+.env.production.example
 
 # IDE
 .vscode/
@@ -49,3 +50,7 @@ htmlcov/
 # Deployment
 *.manifest
 *.spec
+
+node_modules/
+
+.claude/

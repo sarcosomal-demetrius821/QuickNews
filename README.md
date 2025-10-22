@@ -2,6 +2,12 @@
 
 A modernized Django-based news aggregation application that scrapes and displays news from Inshorts.com in both English and Hindi, featuring a sleek dark theme and professional UI/UX.
 
+## 🚀 Live Demo
+
+**Visit the live application**: [https://quicknews.karanjot.co.in](https://quicknews.karanjot.co.in)
+
+Deployed using Docker containers and hosted on Cloudflare for optimal performance and reliability.
+
 ## About This Project
 
 This project started as my **first Django project** during college in **2021** and has been completely revamped with modern web development practices. It showcases the evolution from a learning project to a production-ready application with professional-grade features.
@@ -31,6 +37,8 @@ This project started as my **first Django project** during college in **2021** a
 - ✅ **Share Functionality** - Easy article sharing with native browser API
 - ✅ **Responsive Design** - Fully optimized for mobile, tablet, and desktop
 - ✅ **Performance Optimized** - Lazy loading, efficient database queries, and caching
+- ✅ **Docker Deployment** - Containerized for easy deployment and scaling
+- ✅ **Production Ready** - Live at [quicknews.karanjot.co.in](https://quicknews.karanjot.co.in) hosted on Cloudflare
 
 ## Features
 
@@ -87,6 +95,12 @@ This project started as my **first Django project** during college in **2021** a
 - **CSS Custom Properties** - Dynamic theming system
 - **Intersection Observer API** - Infinite scroll implementation
 
+### Deployment & Infrastructure
+- **Docker** - Containerization for consistent deployments
+- **Cloudflare** - Hosting and CDN for optimal performance
+- **Gunicorn** - Production WSGI server
+- **WhiteNoise** - Static file serving
+
 ## Required Python Packages
 
 ```
@@ -102,7 +116,8 @@ lxml==6.0.2
 ```
 QuickNews/
 ├── DjangoNews/              # Main Django project configuration
-│   ├── settings.py          # Project settings
+│   ├── settings.py          # Development settings
+│   ├── settings_production.py  # Production settings
 │   ├── urls.py              # Root URL routing
 │   └── wsgi.py              # WSGI configuration
 ├── news/                    # Core news application
@@ -127,7 +142,11 @@ QuickNews/
 │       │   ├── en/          # English screenshots
 │       │   └── hi/          # Hindi screenshots
 │       └── old/             # Legacy screenshots
+├── Dockerfile               # Docker configuration
+├── .dockerignore            # Docker ignore patterns
 ├── requirements.txt         # Python dependencies
+├── DEPLOYMENT.md            # Deployment guide
+├── QUICKSTART_DEPLOYMENT.md # Quick deployment instructions
 └── manage.py                # Django CLI tool
 ```
 
@@ -179,6 +198,41 @@ python3 manage.py runserver
    - **Admin Panel**: `http://127.0.0.1:8000/admin/` (if superuser created)
    - **Specific Category**: `http://127.0.0.1:8000/technology/` or `http://127.0.0.1:8000/hindi/sports/`
 
+## Deployment with Docker
+
+The application is containerized using Docker for easy deployment and scalability.
+
+### Docker Setup
+
+1. **Build the Docker image**
+```bash
+docker build -t quicknews .
+```
+
+2. **Run the container**
+```bash
+docker run -p 8000:8000 quicknews
+```
+
+3. **Using Docker Compose** (recommended)
+```bash
+docker-compose up -d
+```
+
+### Production Deployment
+
+The live application at [https://quicknews.karanjot.co.in](https://quicknews.karanjot.co.in) is deployed using:
+
+- **Docker Containers**: Ensures consistent environment across development and production
+- **Cloudflare Hosting**: Provides:
+  - Global CDN for fast content delivery
+  - DDoS protection and security
+  - SSL/TLS encryption
+  - DNS management
+  - Performance optimization
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md) and [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md).
+
 ## Screenshots
 
 ### Current Version (2025) - QuickNews
@@ -213,6 +267,8 @@ Want to see how far we've come? Check out the original version:
 | Mobile Support | Limited responsive | Fully responsive with touch support |
 | Performance | Direct scraping on load | Smart caching, infinite scroll |
 | Code Structure | Function-based views | Class-based views, modular design |
+| Deployment | Basic server setup | Docker containers on Cloudflare |
+| Production | Not deployed | Live at quicknews.karanjot.co.in |
 
 ## Migrating from Old Version
 
@@ -277,6 +333,8 @@ Access the admin panel at `/admin/` to:
 - ✅ **Error Handling**: Comprehensive error handling throughout scraping pipeline
 - ✅ **Responsive Design**: Full mobile, tablet, and desktop optimization
 - ✅ **SEO**: Added proper meta tags and semantic HTML
+- ✅ **Docker Deployment**: Containerized application for consistent deployments
+- ✅ **Production Launch**: Deployed live at [quicknews.karanjot.co.in](https://quicknews.karanjot.co.in) on Cloudflare
 
 ### Bug Fixes
 - Fixed AttributeError issues in web scraping functions
