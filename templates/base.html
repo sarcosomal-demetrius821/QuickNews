@@ -1,0 +1,440 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Latest news from multiple categories - QuickNews">
+    <title>{% block title %}QuickNews{% endblock %}</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts - Inter for clean readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-tertiary: #1f1f1f;
+            --bg-hover: #252525;
+            --border-color: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --accent-blue: #3b82f6;
+            --accent-blue-hover: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-tertiary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bg-hover);
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-tertiary);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            background-color: var(--bg-tertiary);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-blue-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            border-color: #333;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .text-muted {
+            color: var(--text-muted);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="{% if current_language == 'hi' %}/hindi{% else %}/{% endif %}" class="logo">
+                        {% if current_language == 'hi' %}त्वरित समाचार{% else %}QuickNews{% endif %}
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-1">
+                    {% if current_language == 'hi' %}
+                        <a href="/hindi" class="nav-link"><i class="fas fa-home mr-1.5"></i>घर</a>
+                        <a href="/hindi/business" class="nav-link"><i class="fas fa-briefcase mr-1.5"></i>व्यवसाय</a>
+                        <a href="/hindi/national" class="nav-link"><i class="fas fa-flag mr-1.5"></i>भारत</a>
+                        <a href="/hindi/sports" class="nav-link"><i class="fas fa-futbol mr-1.5"></i>खेल</a>
+                        <a href="/hindi/technology" class="nav-link"><i class="fas fa-microchip mr-1.5"></i>तकनीकी</a>
+
+                        <div class="dropdown">
+                            <button class="nav-link flex items-center">
+                                और <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="/hindi/world" class="dropdown-item"><i class="fas fa-globe mr-2"></i>दुनिया</a>
+                                <a href="/hindi/politics" class="dropdown-item"><i class="fas fa-landmark mr-2"></i>राजनीति</a>
+                                <a href="/hindi/entertainment" class="dropdown-item"><i class="fas fa-film mr-2"></i>मनोरंजन</a>
+                                <a href="/hindi/startup" class="dropdown-item"><i class="fas fa-rocket mr-2"></i>स्टार्टअप</a>
+                                <a href="/hindi/miscellaneous" class="dropdown-item"><i class="fas fa-ellipsis-h mr-2"></i>विविध</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="/" class="nav-link"><i class="fas fa-home mr-1.5"></i>Home</a>
+                        <a href="/business" class="nav-link"><i class="fas fa-briefcase mr-1.5"></i>Business</a>
+                        <a href="/national" class="nav-link"><i class="fas fa-flag mr-1.5"></i>India</a>
+                        <a href="/sports" class="nav-link"><i class="fas fa-futbol mr-1.5"></i>Sports</a>
+                        <a href="/technology" class="nav-link"><i class="fas fa-microchip mr-1.5"></i>Technology</a>
+
+                        <div class="dropdown">
+                            <button class="nav-link flex items-center">
+                                More <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="/world" class="dropdown-item"><i class="fas fa-globe mr-2"></i>World</a>
+                                <a href="/politics" class="dropdown-item"><i class="fas fa-landmark mr-2"></i>Politics</a>
+                                <a href="/entertainment" class="dropdown-item"><i class="fas fa-film mr-2"></i>Entertainment</a>
+                                <a href="/startup" class="dropdown-item"><i class="fas fa-rocket mr-2"></i>Startup</a>
+                                <a href="/miscellaneous" class="dropdown-item"><i class="fas fa-ellipsis-h mr-2"></i>Miscellaneous</a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Language Selector -->
+                    <div class="dropdown ml-2">
+                        <button class="nav-link flex items-center">
+                            <i class="fas fa-language mr-1.5"></i>
+                            {% if current_language == 'hi' %}हिन्दी{% else %}English{% endif %}
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="/" class="dropdown-item">English</a>
+                            <a href="/hindi" class="dropdown-item">हिन्दी</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-400 hover:text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mobile-menu">
+            <div class="container py-4 space-y-2">
+                {% if current_language == 'hi' %}
+                    <a href="/hindi" class="block nav-link"><i class="fas fa-home mr-2"></i>घर</a>
+                    <a href="/hindi/business" class="block nav-link"><i class="fas fa-briefcase mr-2"></i>व्यवसाय</a>
+                    <a href="/hindi/national" class="block nav-link"><i class="fas fa-flag mr-2"></i>भारत</a>
+                    <a href="/hindi/sports" class="block nav-link"><i class="fas fa-futbol mr-2"></i>खेल</a>
+                    <a href="/hindi/technology" class="block nav-link"><i class="fas fa-microchip mr-2"></i>तकनीकी</a>
+                    <a href="/hindi/world" class="block nav-link"><i class="fas fa-globe mr-2"></i>दुनिया</a>
+                    <a href="/hindi/politics" class="block nav-link"><i class="fas fa-landmark mr-2"></i>राजनीति</a>
+                    <a href="/hindi/entertainment" class="block nav-link"><i class="fas fa-film mr-2"></i>मनोरंजन</a>
+                    <div class="border-t border-gray-700 my-2 pt-2">
+                        <a href="/" class="block nav-link"><i class="fas fa-language mr-2"></i>Switch to English</a>
+                    </div>
+                {% else %}
+                    <a href="/" class="block nav-link"><i class="fas fa-home mr-2"></i>Home</a>
+                    <a href="/business" class="block nav-link"><i class="fas fa-briefcase mr-2"></i>Business</a>
+                    <a href="/national" class="block nav-link"><i class="fas fa-flag mr-2"></i>India</a>
+                    <a href="/sports" class="block nav-link"><i class="fas fa-futbol mr-2"></i>Sports</a>
+                    <a href="/technology" class="block nav-link"><i class="fas fa-microchip mr-2"></i>Technology</a>
+                    <a href="/world" class="block nav-link"><i class="fas fa-globe mr-2"></i>World</a>
+                    <a href="/politics" class="block nav-link"><i class="fas fa-landmark mr-2"></i>Politics</a>
+                    <a href="/entertainment" class="block nav-link"><i class="fas fa-film mr-2"></i>Entertainment</a>
+                    <div class="border-t border-gray-700 my-2 pt-2">
+                        <a href="/hindi" class="block nav-link"><i class="fas fa-language mr-2"></i>हिन्दी में बदलें</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <h3 class="logo text-2xl mb-3">
+                        {% if current_language == 'hi' %}त्वरित समाचार{% else %}QuickNews{% endif %}
+                    </h3>
+                    <p class="text-secondary text-sm leading-relaxed mb-4">
+                        {% if current_language == 'hi' %}
+                        विभिन्न श्रेणियों में नवीनतम समाचार के लिए आपका विश्वसनीय स्रोत।
+                        {% else %}
+                        Your trusted source for latest news across multiple categories.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">
+                        {% if current_language == 'hi' %}त्वरित लिंक{% else %}Quick Links{% endif %}
+                    </h4>
+                    <ul class="space-y-2 text-sm">
+                        {% if current_language == 'hi' %}
+                            <li><a href="/hindi" class="text-secondary hover:text-primary transition">होम</a></li>
+                            <li><a href="/hindi/business" class="text-secondary hover:text-primary transition">व्यवसाय</a></li>
+                            <li><a href="/hindi/technology" class="text-secondary hover:text-primary transition">तकनीकी</a></li>
+                            <li><a href="/hindi/sports" class="text-secondary hover:text-primary transition">खेल</a></li>
+                        {% else %}
+                            <li><a href="/" class="text-secondary hover:text-primary transition">Home</a></li>
+                            <li><a href="/business" class="text-secondary hover:text-primary transition">Business</a></li>
+                            <li><a href="/technology" class="text-secondary hover:text-primary transition">Technology</a></li>
+                            <li><a href="/sports" class="text-secondary hover:text-primary transition">Sports</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-sm">
+                        {% if current_language == 'hi' %}हमसे जुड़ें{% else %}Connect{% endif %}
+                    </h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-purple-600 rounded-lg flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-700 rounded-lg flex items-center justify-center transition">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800">
+                <p class="text-secondary text-sm text-center">
+                    © 2025 QuickNews. {% if current_language == 'hi' %}सर्वाधिकार सुरक्षित।{% else %}All rights reserved.{% endif %}
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const menuButton = event.target.closest('[onclick="toggleMobileMenu()"]');
+
+            if (!menu.contains(event.target) && !menuButton && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
